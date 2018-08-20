@@ -21,7 +21,7 @@
 
 version = 1
 
-import sys
+import sys, argparse
 
 from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog, QMessageBox
 from PyQt5 import QtCore
@@ -174,7 +174,11 @@ p, li { white-space: pre-wrap; }\n
 <p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\">along with this program.  If not, see <a href=\"http://www.gnu.org/licenses/\">http://www.gnu.org/licenses/</a>.</p></body></html>"""))
 
 if __name__ == "__main__":
-  app = QApplication(sys.argv)
-  gui = FVK()
-  gui.show()
-  sys.exit(app.exec_())
+    app = QApplication(sys.argv)
+    parser = argparse.ArgumentParser()
+    parser.add_argument(dest="databaseName", action="store", help="the database name")
+    args = parser.parse_args(app.arguments()[1:])
+    databaseName = args.databaseName
+    gui = FVK()
+    gui.show()
+    sys.exit(app.exec_())
